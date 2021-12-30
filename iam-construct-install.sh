@@ -44,7 +44,7 @@ if [[ $SETUP_BASICS -eq 1 ]]; then
 	sudo apt update
 
 	sudo apt install -y python3-distutils
-	sudo apt install curl 
+	sudo apt install -y curl 
 
 	curl https://bootstrap.pypa.io/get-pip.py | sudo -H python3.6
 	sudo -H pip3.6 install numpy matplotlib virtualenv
@@ -59,17 +59,17 @@ if [[ $SETUP_ROS_M -eq 1 ]]; then
 	sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 	curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 	sudo apt update
-	sudo apt install ros-melodic-desktop-full
+	sudo apt install -y ros-melodic-desktop-full
 	echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 	source ~/.bashrc
 
-	sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
-	sudo apt install python-rosdep
+	sudo apt install -y python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+	sudo apt install -y python-rosdep
 	sudo rosdep init
 	rosdep update
 
-	sudo apt install ros-melodic-rosbridge-server
-	sudo apt install ros-melodic-web-video-server
+	sudo apt install -y ros-melodic-rosbridge-server
+	sudo apt install -y ros-melodic-web-video-server
 fi
 
 if [[ $SETUP_FRANKA -eq 1 ]]; then
@@ -78,7 +78,7 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	sudo apt update
 
 	git clone --recurse-submodules git@github.com:iamlab-cmu/frankapy.git
-	sudo apt install ros-melodic-libfranka ros-melodic-franka-ros
+	sudo apt install -y ros-melodic-libfranka ros-melodic-franka-ros
 
 	source ~/.bashrc
 	source $BASE_FOLDER/iamEnv/bin/activate
@@ -159,7 +159,7 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 	curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 	sudo apt-add-repository https://packages.microsoft.com/ubuntu/18.04/prod
 	sudo apt-get update
-	sudo apt install libk4a1.4 libk4a1.4-dev k4a-tools
+	sudo apt install -y libk4a1.4 libk4a1.4-dev k4a-tools
 
 	cd catkin_ws/src
 	git clone https://github.com/microsoft/Azure_Kinect_ROS_Driver.git
@@ -177,7 +177,7 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 	pip install -e .
 
 	cd $BASE_FOLDER/iam-interface/camera-calibration
-	sudo apt install python3-tk python3-empy
+	sudo apt install -y python3-tk python3-empy
 	#pip install -e .
 fi
 
