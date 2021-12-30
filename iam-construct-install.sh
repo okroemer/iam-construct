@@ -80,6 +80,7 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	git clone --recurse-submodules git@github.com:iamlab-cmu/frankapy.git
 	sudo apt install ros-melodic-libfranka ros-melodic-franka-ros
 
+	source ~/.bashrc
 	source $BASE_FOLDER/iamEnv/bin/activate
 
 	cd $BASE_FOLDER/frankapy
@@ -120,6 +121,7 @@ if [[ $SETUP_HUMAN -eq 1 ]]; then
 	cd $BASE_FOLDER
 	sudo apt update
 
+	source ~/.bashrc
 	source $BASE_FOLDER/iamEnv/bin/activate
 	deactivate
 	curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
@@ -149,6 +151,7 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 	cd $BASE_FOLDER/iam-interface
 	sudo apt update
 
+	source ~/.bashrc
 	source $BASE_FOLDER/iamEnv/bin/activate
 	pip install open3d
 
@@ -182,6 +185,7 @@ fi
 
 if [[ $SETUP_CORE -eq 1 ]]; then
 	echo "INSTALLING - IAM Core Interface"
+	source ~/.bashrc
 	source $BASE_FOLDER/iamEnv/bin/activate
 
 	#Pillar-State
