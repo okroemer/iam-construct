@@ -86,8 +86,10 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	pip install -e .
 
 	./bash_scripts/make_catkin.sh
+
 	echo "source $BASE_FOLDER/frankapy/catkin_ws/devel/setup.bash --extend" >> ~/.bashrc
 	source ~/.bashrc
+	source $BASE_FOLDER/iamEnv/bin/activate
 
 	sudo apt-get install autoconf automake libtool curl make g++ unzip
 	wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-all-3.11.4.zip
@@ -98,6 +100,7 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	make
 	sudo make install
 	sudo ldconfig
+	cd ..
 	./bash_scripts/make_proto.sh
 	
 fi
@@ -126,12 +129,12 @@ if [[ $SETUP_HUMAN -eq 1 ]]; then
 	pip install open3d
 	pip install bokeh
 
-	cd $BASE_FOLDER/web-interface/javascript
+	cd $BASE_FOLDER/iam-interface/web-interface/javascript
 	npm install
 
 	#let host_name = "localhost"
 
-	cd $BASE_FOLDER/web-interface/
+	cd $BASE_FOLDER/iam-interface/
 	git clone https://github.com/iamlab-cmu/DEXTR-KerasTensorflow.git
 	cd DEXTR-KerasTensorflow
 	pip install matplotlib opencv-python pillow scikit-learn scikit-image h5py tensorflow keras
@@ -149,7 +152,7 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 	source $BASE_FOLDER/iamEnv/bin/activate
 	pip install open3d
 
-	cd $BASE_FOLDER/iam-interface
+	cd $BASE_.FOLDER/iam-interface
 	curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 	sudo apt-add-repository https://packages.microsoft.com/ubuntu/18.04/prod
 	sudo apt-get update
@@ -165,13 +168,14 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 
 	echo "source $BASE_FOLDER/iam-interface/catkin_ws/devel/setup.bash --extend" >> ~/.bashrc
 	source ~/.bashrc
+	source $BASE_FOLDER/iamEnv/bin/activate
 
 	cd $BASE_FOLDER/iam-interface/perception
 	pip install -e .
 
 	cd $BASE_FOLDER/iam-interface/camera-calibration
 	sudo apt install python3-tk python3-empy
-	pip install -e .
+	#pip install -e .
 fi
 
 
