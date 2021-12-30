@@ -81,11 +81,12 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	sudo apt install -y ros-melodic-libfranka ros-melodic-franka-ros
 
 	source ~/.bashrc
-	source $BASE_FOLDER/iamEnv/bin/activate
+	source $BASE_FOLDER/iamEnv/bin/activate --extend
 
 	cd $BASE_FOLDER/frankapy
 	pip install -e .
 
+	source /opt/ros/melodic/setup.bash
 	./bash_scripts/make_catkin.sh
 
 	echo "source $BASE_FOLDER/frankapy/catkin_ws/devel/setup.bash --extend" >> ~/.bashrc
@@ -164,6 +165,7 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 	cd catkin_ws/src
 	git clone https://github.com/microsoft/Azure_Kinect_ROS_Driver.git
 	cd ..
+	source /opt/ros/melodic/setup.bash
 	catkin_make
 
 	cd /etc/udev/rules.d/
