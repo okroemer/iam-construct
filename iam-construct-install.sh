@@ -98,7 +98,7 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	cd protobuf-3.11.4
 	./configure
 	
-	make
+	make -j4
 	sudo make install
 	sudo ldconfig
 	cd ..
@@ -155,7 +155,7 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 	source $BASE_FOLDER/iamEnv/bin/activate
 	pip install open3d
 
-	cd $BASE_.FOLDER/iam-interface
+	cd $BASE_FOLDER/iam-interface
 	curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 	sudo apt-add-repository https://packages.microsoft.com/ubuntu/18.04/prod
 	sudo apt-get update
