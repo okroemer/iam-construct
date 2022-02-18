@@ -44,9 +44,9 @@ if [[ $SETUP_BASICS -eq 1 ]]; then
 	sudo apt update
 
 	sudo apt install -y python3-distutils
-	sudo apt install -y curl 
+	sudo apt install -y curl
 
-	curl https://bootstrap.pypa.io/get-pip.py | sudo -H python3.6
+	curl https://bootstrap.pypa.io/pip/3.6/get-pip.py | sudo -H python3.6
 	sudo -H pip3.6 install numpy matplotlib virtualenv
 	virtualenv -p python3.6 iamEnv
 fi
@@ -98,13 +98,13 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	unzip protobuf-all-3.11.4.zip
 	cd protobuf-3.11.4
 	./configure
-	
+
 	make -j4
 	sudo make install
 	sudo ldconfig
 	cd ..
 	./bash_scripts/make_proto.sh
-	
+
 fi
 
 
@@ -191,7 +191,7 @@ if [[ $SETUP_CORE -eq 1 ]]; then
 	source $BASE_FOLDER/iamEnv/bin/activate
 
 	#Pillar-State
-	cd $BASE_FOLDER/iam-interface	
+	cd $BASE_FOLDER/iam-interface
 	sudo rm -r iam-pillar
 	git clone --recursive git@github.com:iamlab-cmu/pillar-state.git
 	cd pillar-state
