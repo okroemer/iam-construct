@@ -46,7 +46,7 @@ if [[ $SETUP_BASICS -eq 1 ]]; then
 	sudo apt install -y python3-distutils
 	sudo apt install -y curl 
 
-	curl https://bootstrap.pypa.io/get-pip.py | sudo -H python3.6
+	curl https://bootstrap.pypa.io/pip/3.6/get-pip.py | sudo -H python3.6
 	sudo -H pip3.6 install numpy matplotlib virtualenv
 	virtualenv -p python3.6 iamEnv
 fi
@@ -205,6 +205,10 @@ if [[ $SETUP_CORE -eq 1 ]]; then
 
 	#IAM-Skills
 	cd $BASE_FOLDER/iam-interface/iam-skills
+	pip install -e .
+
+	#IAM-Domain-Handler
+	cd $BASE_FOLDER/iam-interface/iam-domain-handler
 	pip install -e .
 
 	#IAM-Behavior Tree
