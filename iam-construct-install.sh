@@ -202,7 +202,7 @@ if [[ $SETUP_CORE -eq 1 ]]; then
 	#Pillar-State
 	cd $BASE_FOLDER/iam-interface	
 	sudo rm -r pillar-state
-	git clone --recursive https://github.com:iamlab-cmu/pillar-state.git
+	git clone --recursive https://github.com/iamlab-cmu/pillar-state.git
 	cd pillar-state
 	./make_scripts/make_proto_cpp.sh
 	./make_scripts/make_view_cpp.sh
