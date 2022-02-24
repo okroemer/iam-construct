@@ -77,7 +77,7 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	cd $BASE_FOLDER
 	sudo apt update
 
-	git clone --recurse-submodules git@github.com:iamlab-cmu/frankapy.git
+	git clone --recurse-submodules https://github.com/iamlab-cmu/frankapy.git
 	sudo apt install -y ros-melodic-libfranka ros-melodic-franka-ros
 
 	source ~/.bashrc
@@ -111,7 +111,7 @@ fi
 
 if [ ! -d "$BASE_FOLDER/iam-interface" ]; then
 	cd $BASE_FOLDER
-	git clone --recurse-submodules git@github.com:iamlab-cmu/iam-interface.git
+	git clone --recurse-submodules https://github.com/iamlab-cmu/iam-interface.git
 	source $BASE_FOLDER/iamEnv/bin/activate
 fi
 
@@ -198,7 +198,7 @@ if [[ $SETUP_CORE -eq 1 ]]; then
 	#Pillar-State
 	cd $BASE_FOLDER/iam-interface	
 	sudo rm -r pillar-state
-	git clone --recursive git@github.com:iamlab-cmu/pillar-state.git
+	git clone --recursive https://github.com:iamlab-cmu/pillar-state.git
 	cd pillar-state
 	./make_scripts/make_proto_cpp.sh
 	./make_scripts/make_view_cpp.sh
