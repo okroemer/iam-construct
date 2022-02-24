@@ -23,16 +23,16 @@ fi
 gnome-terminal --geometry=100x5-0+0 --hide-menubar --window-with-profile=IAMterm -- bash tabber.sh \
 -n "roscore" \
 -t "roscore" \
--c "sleep 3" \
+-c "sleep 10" \
 -n "rosbridge_server" \
 -t "roslaunch rosbridge_server rosbridge_websocket.launch" \
--c "sleep 1" \
+-c "sleep 3" \
 -n "web_vid_server" \
 -t "rosrun web_video_server web_video_server" \
--c "sleep 1" \
+-c "sleep 3" \
 -n "azure_kinect_driver" \
 -t "roslaunch azure_kinect_ros_driver driver.launch" \
--c "sleep 1" \
+-c "sleep 3" \
 -n "DEXTR-KerasTensorFlow" \
 -t "cd ~/Prog/iam-interface/iam-bokeh-server; source ~/Prog/iamEnv/bin/activate; python dextr.py"
 
@@ -45,7 +45,7 @@ gnome-terminal --geometry=100x5-0+275 --hide-menubar --window-with-profile=IAMte
 -n "bokeh" \
 -t "cd ~/Prog/iam-interface/iam-bokeh-server; source ~/Prog/iamEnv/bin/activate; bokeh serve --allow-websocket-origin='*' bokeh_server.py" \
 -n "frankapy" \
--t "cd ~/Prog/frankapy; ./bash_scripts/start_control_pc.sh -i $control_comp_ip"
+-t "cd ~/Prog/frankapy; ./bash_scripts/start_control_pc.sh -u student -i $control_comp_ip"
 
 
 # Launch iam-vision, iam-domain-handler, iam-bt

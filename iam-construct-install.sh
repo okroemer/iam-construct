@@ -164,9 +164,14 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 
 	cd catkin_ws/src
 	git clone https://github.com/microsoft/Azure_Kinect_ROS_Driver.git
-	cd ..
+	git clone https://github.com/ros-perception/vision_opencv.git
+	cd vision_opencv
+	git checkout melodic
+	cd ../..
 	source /opt/ros/melodic/setup.bash
-	catkin_make
+	catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so
+
+	sudo mv /opt/ros/melodic/lib/python2.7/dist-packages/cv_bridge /opt/ros/melodic/lib/python2.7/dist-packages/cv_bridge_2.7
 
 	cd /etc/udev/rules.d/
 	sudo wget https://raw.githubusercontent.com/microsoft/Azure-Kinect-Sensor-SDK/develop/scripts/99-k4a.rules
@@ -192,7 +197,7 @@ if [[ $SETUP_CORE -eq 1 ]]; then
 
 	#Pillar-State
 	cd $BASE_FOLDER/iam-interface	
-	sudo rm -r iam-pillar
+	sudo rm -r pillar-state
 	git clone --recursive git@github.com:iamlab-cmu/pillar-state.git
 	cd pillar-state
 	./make_scripts/make_proto_cpp.sh
