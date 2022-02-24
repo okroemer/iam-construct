@@ -169,6 +169,10 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 	git checkout melodic
 	cd ../..
 	source /opt/ros/melodic/setup.bash
+	
+	# TODO: a better solution for this bandaid
+	sudo cp -r /usr/lib/python2.7/dist-packages/catkin_pkg /opt/ros/melodic/lib/python2.7/dist-packages/catkin_pkg
+
 	catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so
 
 	sudo mv /opt/ros/melodic/lib/python2.7/dist-packages/cv_bridge /opt/ros/melodic/lib/python2.7/dist-packages/cv_bridge_2.7
