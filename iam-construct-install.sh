@@ -130,7 +130,6 @@ if [[ $SETUP_HUMAN -eq 1 ]]; then
 
 	source $BASE_FOLDER/iamEnv/bin/activate
 	pip install open3d
-	pip install bokeh
 
 	cd $BASE_FOLDER/iam-interface/web-interface/javascript
 	npm install
@@ -207,6 +206,10 @@ if [[ $SETUP_CORE -eq 1 ]]; then
 	./make_scripts/make_proto_cpp.sh
 	./make_scripts/make_view_cpp.sh
 	pip install -e python
+
+	#Bokeh Server
+	cd $BASE_FOLDER/iam-interface/iam-bokeh-server
+	pip install -r requirements.txt 
 
 	#Pillar-Skills
 	cd $BASE_FOLDER/iam-interface/pillar-skills

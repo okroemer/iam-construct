@@ -21,6 +21,9 @@ fi
 
 # launch ROS things
 gnome-terminal --geometry=100x5-0+0 --hide-menubar --window-with-profile=IAMterm -- bash tabber.sh \
+-n "npm" \
+-t "cd ~/Prog/iam-interface/web-interface/javascript/; source ~/Prog/iamEnv/bin/activate; npm start" \
+-c "sleep 3" \
 -n "roscore" \
 -t "roscore" \
 -c "sleep 10" \
@@ -39,9 +42,7 @@ gnome-terminal --geometry=100x5-0+0 --hide-menubar --window-with-profile=IAMterm
 
 # Launch npm, bokeh, frankapy
 gnome-terminal --geometry=100x5-0+275 --hide-menubar --window-with-profile=IAMterm -- bash tabber.sh \
--n "npm" \
--t "cd ~/Prog/iam-interface/web-interface/javascript/; source ~/Prog/iamEnv/bin/activate; npm start" \
--c "sleep 3" \
+-c "sleep 13" \
 -n "bokeh" \
 -t "cd ~/Prog/iam-interface/iam-bokeh-server; source ~/Prog/iamEnv/bin/activate; bokeh serve --allow-websocket-origin='*' bokeh_server.py" \
 -n "frankapy" \
@@ -50,14 +51,15 @@ gnome-terminal --geometry=100x5-0+275 --hide-menubar --window-with-profile=IAMte
 
 # Launch iam-vision, iam-domain-handler, iam-bt
 gnome-terminal --geometry=100x5-0+550 --hide-menubar --window-with-profile=IAMterm -- bash tabber.sh \
+-c "sleep 13" \
 -n "iam-vision" \
 -t "cd ~/Prog/iam-interface/iam-vision; source ~/Prog/iamEnv/bin/activate; python iam_vision_server.py" \
 -c "sleep 1" \
 -n "iam-domain-handler" \
 -t "cd ~/Prog/iam-interface/iam-domain-handler; source ~/Prog/iamEnv/bin/activate; ./examples/RunAll.sh" \
 -c "sleep 1" \
--n "iam-bt" \
--t "cd ~/Prog/iam-interface/iam-bt; source ~/Prog/iamEnv/bin/activate; python examples/main_bt.py"
+# -n "iam-bt" \
+# -t "cd ~/Prog/iam-interface/iam-bt; source ~/Prog/iamEnv/bin/activate; python examples/main_bt.py"
 
 
 # launch point cloud to voxel publisher (if requested)
