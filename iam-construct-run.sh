@@ -37,7 +37,7 @@ gnome-terminal --geometry=100x5-0+0 --hide-menubar --window-with-profile=IAMterm
 -t "roslaunch azure_kinect_ros_driver driver.launch" \
 -c "sleep 3" \
 -n "DEXTR-KerasTensorFlow" \
--t "cd ~/Prog/iam-interface/iam-bokeh-server; source ~/Prog/iamEnv/bin/activate; python dextr.py"
+-t "cd ~/Prog/iam-interface/DEXTR-KerasTensorflow; source ~/Prog/iamEnv/bin/activate; python dextr_ros_service.py"
 
 
 # Launch npm, bokeh, frankapy
