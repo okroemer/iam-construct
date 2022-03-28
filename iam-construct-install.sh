@@ -46,7 +46,7 @@ if [[ $SETUP_BASICS -eq 1 ]]; then
 	sudo apt install -y python3-distutils
 	sudo apt install -y curl 
 
-	curl https://bootstrap.pypa.io/get-pip.py | sudo -H python3.6
+	curl https://bootstrap.pypa.io/pip/3.6/get-pip.py | sudo -H python3.6
 	sudo -H pip3.6 install numpy matplotlib virtualenv
 	virtualenv -p python3.6 iamEnv
 fi
@@ -77,7 +77,7 @@ if [[ $SETUP_FRANKA -eq 1 ]]; then
 	cd $BASE_FOLDER
 	sudo apt update
 
-	git clone --recurse-submodules git@github.com:iamlab-cmu/frankapy.git
+	git clone --recurse-submodules https://github.com/iamlab-cmu/frankapy.git
 	sudo apt install -y ros-melodic-libfranka ros-melodic-franka-ros
 
 	source ~/.bashrc
@@ -111,7 +111,7 @@ fi
 
 if [ ! -d "$BASE_FOLDER/iam-interface" ]; then
 	cd $BASE_FOLDER
-	git clone --recurse-submodules git@github.com:iamlab-cmu/iam-interface.git
+	git clone --recurse-submodules https://github.com/iamlab-cmu/iam-interface.git
 	source $BASE_FOLDER/iamEnv/bin/activate
 fi
 
@@ -130,7 +130,6 @@ if [[ $SETUP_HUMAN -eq 1 ]]; then
 
 	source $BASE_FOLDER/iamEnv/bin/activate
 	pip install open3d
-	pip install bokeh
 
 	cd $BASE_FOLDER/iam-interface/web-interface/javascript
 	npm install
@@ -164,9 +163,18 @@ if [[ $SETUP_SENSOR -eq 1 ]]; then
 
 	cd catkin_ws/src
 	git clone https://github.com/microsoft/Azure_Kinect_ROS_Driver.git
-	cd ..
+	git clone https://github.com/ros-perception/vision_opencv.git
+	cd vision_opencv
+	git checkout melodic
+	cd ../..
 	source /opt/ros/melodic/setup.bash
-	catkin_make
+	
+	# TODO: a better solution for this bandaid
+	sudo cp -r /usr/lib/python2.7/dist-packages/catkin_pkg /opt/ros/melodic/lib/python2.7/dist-packages/catkin_pkg
+
+	catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so
+
+	sudo mv /opt/ros/melodic/lib/python2.7/dist-packages/cv_bridge /opt/ros/melodic/lib/python2.7/dist-packages/cv_bridge_2.7
 
 	cd /etc/udev/rules.d/
 	sudo wget https://raw.githubusercontent.com/microsoft/Azure-Kinect-Sensor-SDK/develop/scripts/99-k4a.rules
@@ -192,12 +200,16 @@ if [[ $SETUP_CORE -eq 1 ]]; then
 
 	#Pillar-State
 	cd $BASE_FOLDER/iam-interface	
-	sudo rm -r iam-pillar
-	git clone --recursive git@github.com:iamlab-cmu/pillar-state.git
+	sudo rm -r pillar-state
+	git clone --recursive https://github.com/iamlab-cmu/pillar-state.git
 	cd pillar-state
 	./make_scripts/make_proto_cpp.sh
 	./make_scripts/make_view_cpp.sh
 	pip install -e python
+
+	#Bokeh Server
+	cd $BASE_FOLDER/iam-interface/iam-bokeh-server
+	pip install -r requirements.txt 
 
 	#Pillar-Skills
 	cd $BASE_FOLDER/iam-interface/pillar-skills
@@ -205,6 +217,10 @@ if [[ $SETUP_CORE -eq 1 ]]; then
 
 	#IAM-Skills
 	cd $BASE_FOLDER/iam-interface/iam-skills
+	pip install -e .
+
+	#IAM-Domain-Handler
+	cd $BASE_FOLDER/iam-interface/iam-domain-handler
 	pip install -e .
 
 	#IAM-Behavior Tree
